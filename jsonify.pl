@@ -13,21 +13,30 @@ my @tmp_arr = <IN>;
 close IN;
 
 #Here is wher the actual conversion happens
+#delete the first three lines and the last line. They contian the metadata
+#defining the file as a plist
+
+#first three lines
+for ($x = 0; $x < 3; $x++) {
+	shift(@tmp_arr);
+}
+
+#last line
+pop(@tmp_arr);
+
 #Each replacement operation converts an xml tag to its JSON equivalent.
 foreach $i (@tmp_arr) {
-	$i =~ s/<string>/: /g;
-	$i =~ s/<\/string>//g;
-	$i =~ s/<key>|<\/key>/"/g;
-	$i =~ s/<false\/>/: false/g;
-	$i =~ s/<true\/>/: true/g;
-	$i =~ s/<integer>/: /g;
-	$i =~ s/<\/integer>//g;
-	$i =~ s/<dict>/{/g;
-	$i =~ s/<\/dict>/}/g;
-	$i =~ s/<array>/[/g;
-	$i =~ s/<\/array>/]/g;
-	$i =~ s/\s\+:/:/g;
-	$i =~ s/\n:/ :/g;
+	 $i =~ s/<string>/: /g;
+	 $i =~ s/<\/string>//g;
+	 $i =~ s/<key>|<\/key>/"/g;
+	 $i =~ s/<false\/>/: false/g;
+	 $i =~ s/<true\/>/: true/g;
+	 $i =~ s/<integer>/: /g;
+	 $i =~ s/<\/integer>//g;
+	 $i =~ s/<dict>/{/g;
+	 $i =~ s/<\/dict>/}/g;
+	 $i =~ s/<array>/[/g;
+	 $i =~ s/<\/array>/]/g;
 }
 
 #writeout
