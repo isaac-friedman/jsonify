@@ -1,0 +1,22 @@
+README FILE
+
+jsonify for the PC/Mac 
+written by Isaac Friedman
+Release 0.5 May 6, 2012
+
+Decision of Distribution license pending.
+Meanwhile, feel free to use and redistribute
+the code with attribution.
+
+USAGE
+-----
+
+Just download the source file and run it from your command
+prompt. It takes your input file as an argument and produces
+an output file called output.json.
+
+
+RESTRICTIONS/TO-DO/WARNINGS
+---------------------------
+
+This is a beta release with minimal testing. Use at your own risk.
