@@ -2,7 +2,7 @@ README FILE
 
 jsonify for the PC/Mac 
 written by Isaac Friedman
-Release 0.5 May 6, 2012
+Release 0.6 May 6, 2012
 
 Decision of Distribution license pending.
 Meanwhile, feel free to use and redistribute
@@ -15,8 +15,14 @@ Just download the source file and run it from your command
 prompt. It takes your input file as an argument and produces
 an output file called output.json.
 
+RELEASE NOTES
+-------------
+
+Bug fix: Arrays were previously converted to dictionaries. Fixed circa 7:30pm EDT May 6, 2012
+
 
 RESTRICTIONS/TO-DO/WARNINGS
 ---------------------------
+As of now, the output is not the most human readable. This should change by version 1.0.
 
 This is a beta release with minimal testing. Use at your own risk.

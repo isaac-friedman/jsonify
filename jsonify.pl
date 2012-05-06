@@ -24,6 +24,7 @@ for ($x = 0; $x < 3; $x++) {
 #last line
 pop(@tmp_arr);
 
+
 #Each replacement operation converts an xml tag to its JSON equivalent.
 foreach $i (@tmp_arr) {
 	 $i =~ s/<string>/: /g;
@@ -33,10 +34,24 @@ foreach $i (@tmp_arr) {
 	 $i =~ s/<true\/>/: true/g;
 	 $i =~ s/<integer>/: /g;
 	 $i =~ s/<\/integer>//g;
-	 $i =~ s/<dict>/{/g;
+	 $i =~ s/<dict>/: {/g;
 	 $i =~ s/<\/dict>/}/g;
-	 $i =~ s/<array>/[/g;
+	 $i =~ s/<array>/: [/g;
 	 $i =~ s/<\/array>/]/g;
+}
+
+#This flag will be set to true when inside an array. This is important
+$flag = 0;
+foreach $j (@tmp_arr) {
+	if ($j =~ m/\[/) {
+		$flag = 1;
+	}
+	if ($j =~ /\]/) {
+		$flag = 0;
+	}
+	if($flag == 1 && $j !~ m/\[/) {
+		$j =~ s/:/,/g;
+	}
 }
 
 #writeout
