@@ -27,13 +27,13 @@ pop(@tmp_arr);
 
 #Each replacement operation converts an xml tag to its JSON equivalent.
 foreach $i (@tmp_arr) {
-	 $i =~ s/<string>/: /g;
-	 $i =~ s/<\/string>//g;
-	 $i =~ s/<key>|<\/key>/"/g;
-	 $i =~ s/<false\/>/: false/g;
-	 $i =~ s/<true\/>/: true/g;
-	 $i =~ s/<integer>/: /g;
-	 $i =~ s/<\/integer>//g;
+	 $i =~ s/<string>/: "/g;
+	 $i =~ s/<\/string>/"/g;
+	 $i =~ s/<key>|<\/key>//g;
+	 $i =~ s/<false\/>/: "false"/g;
+	 $i =~ s/<true\/>/: "true"/g;
+	 $i =~ s/<integer>/: "/g;
+	 $i =~ s/<\/integer>/"/g;
 	 $i =~ s/<dict>/: {/g;
 	 $i =~ s/<\/dict>/}/g;
 	 $i =~ s/<array>/: [/g;
