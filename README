@@ -2,7 +2,10 @@ README FILE
 
 jsonify for the PC/Mac 
 written by Isaac Friedman
+Release 1.0 August 4, 2014
 Release 0.6 May 6, 2012
+
+
 
 Decision of Distribution license pending.
 Meanwhile, feel free to use and redistribute
@@ -17,12 +20,8 @@ an output file called output.json.
 
 RELEASE NOTES
 -------------
+VERSION 1.0: Complete rewrite 
 
+VERSION: 0.6
 Bug fix: Arrays were previously converted to dictionaries. Fixed circa 7:30pm EDT May 6, 2012
 
-
-RESTRICTIONS/TO-DO/WARNINGS
----------------------------
-As of now, the output is not the most human readable. This should change by version 1.0.
-
-This is a beta release with minimal testing. Use at your own risk.

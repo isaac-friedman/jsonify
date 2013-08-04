@@ -1,62 +1,31 @@
 #!/usr/bin/perl -w
 
 
-#open the input file specified in the command line
-open IN, "<", $ARGV[0] || die "Input file could not be opened. Please check spelling, path and location.";
+# Welcome to version 2.0 of jsonify in which I 
+# scrap the confusing regexen and write something
+# quick and easy-to-follow because this is going
+# into use.
 
-#open a file handle to write out to
-open OUT, ">", "output.json" || die "Cannot create output file. Please check directory permissions.";
+use strict;
 
-my @tmp_arr = <IN>;
+#necessary libraries
+use Mac::PropertyList qw( :all);
+use JSON::XS;
 
-#We no longer need the input file
+print "Imports correctly. \n";
+
+open my($IN), "<", $ARGV[0] || die "Input file could not be opened. Please check spelling, path and location.";
+print "Filehandle opened. \n";
+#parse the plist into a perl data structure.
+my $data = parse_plist_fh($IN)->as_perl;
 close IN;
 
-#Here is wher the actual conversion happens
-#delete the first three lines and the last line. They contian the metadata
-#defining the file as a plist
+print "conversion performed. \n";
 
-#first three lines
-for ($x = 0; $x < 3; $x++) {
-	shift(@tmp_arr);
-}
+my $jsonData = encode_json($data);
 
-#last line
-pop(@tmp_arr);
+open OUT, ">", "output.json" || die "Cannot create output file. Please check directory permissions.";
 
-
-#Each replacement operation converts an xml tag to its JSON equivalent.
-foreach $i (@tmp_arr) {
-	 $i =~ s/<string>/: "/g;
-	 $i =~ s/<\/string>/"/g;
-	 $i =~ s/<key>|<\/key>//g;
-	 $i =~ s/<false\/>/: "false"/g;
-	 $i =~ s/<true\/>/: "true"/g;
-	 $i =~ s/<integer>/: "/g;
-	 $i =~ s/<\/integer>/"/g;
-	 $i =~ s/<dict>/: {/g;
-	 $i =~ s/<\/dict>/}/g;
-	 $i =~ s/<array>/: [/g;
-	 $i =~ s/<\/array>/]/g;
-}
-
-#This flag will be set to true when inside an array. This is important
-$flag = 0;
-foreach $j (@tmp_arr) {
-	if ($j =~ m/\[/) {
-		$flag = 1;
-	}
-	if ($j =~ /\]/) {
-		$flag = 0;
-	}
-	if($flag == 1 && $j !~ m/\[/) {
-		$j =~ s/:/,/g;
-	}
-}
-
-#writeout
-foreach (@tmp_arr) {
-	print OUT "$_";
-}
+print OUT $jsonData;
 
 close OUT;
